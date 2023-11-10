@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStats stats;
     private Rigidbody2D rb;
     private Collider2D col;
-    private Animator animator;
     private float health;
 
     [SerializeField] protected Transform singleShotEmitter;
@@ -18,7 +17,6 @@ public class Player : MonoBehaviour
     public PlayerStats Stats { get => stats; set => stats = value; }
     public Rigidbody2D Rb { get => rb; }
     public Collider2D Col { get => col; }
-    public Animator Animator { get => animator; }
     public float Health { get => health; set => health = value; }
 
     public virtual void Start()
@@ -35,7 +33,6 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
-        animator = GetComponentInChildren<Animator>();
 
         health = stats.MaxHealth;
     }

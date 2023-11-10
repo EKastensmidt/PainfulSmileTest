@@ -134,7 +134,7 @@ public class PlayerController : Player
                 StartCoroutine(DestroyProjectile(0.4f, shotProjectile));
             }
 
-            tripleShotTimer = Stats.SingleShotCD;
+            tripleShotTimer = Stats.TripleShotCD;
         }
     }
 

@@ -9,8 +9,10 @@ public class EnemyStats : ScriptableObject
     [SerializeField] private int maxHealth;
     [SerializeField] private float speed;
     [SerializeField] private int damage;
+    [SerializeField] private float rotationSpeed;
 
     public int MaxHealth { get => maxHealth; }
     public float Speed { get => speed; }
     public int Damage { get => damage; }
+    public float RotationSpeed { get => rotationSpeed; }
 }
