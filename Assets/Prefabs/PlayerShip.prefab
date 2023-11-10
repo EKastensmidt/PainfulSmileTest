@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443943421380295814}
   m_Layer: 0
-  m_Name: TripleShotEmitter2
+  m_Name: TripleShotEmitterL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875175875661696977}
   m_Layer: 0
-  m_Name: TripleShotEmitter
+  m_Name: TripleShotEmitterR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

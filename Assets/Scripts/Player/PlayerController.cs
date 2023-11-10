@@ -55,7 +55,7 @@ public class PlayerController : Player
         transform.position += movement * Stats.Speed * Time.deltaTime;
     }
 
-    private void RotatePlayer()//ROTATE BASED ON INPUT
+    private void RotatePlayer()
     {
         if(movement != Vector3.zero)
         {
@@ -64,7 +64,7 @@ public class PlayerController : Player
         }
     }
 
-    private void SingleShot(InputAction.CallbackContext context) //FORWARD SHOT
+    private void SingleShot(InputAction.CallbackContext context) 
     {
         if (singleShotTimer < 0 && context.ReadValue<float>() == 1)
         {
@@ -74,25 +74,25 @@ public class PlayerController : Player
             Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
             projectileRb.velocity = shootDirection.normalized * Stats.ProjectileSpeed;
 
-            StartCoroutine(DestroyProjectile(4f, shotProjectile)); //DESTROY PROJECTILE IF DOESNT HIT ANYTHING
+            StartCoroutine(DestroyProjectile(4f, shotProjectile)); 
 
             singleShotTimer = Stats.SingleShotCD;
         }
     }
 
-    private void TripleShot(InputAction.CallbackContext context) //TRIPLE SHOTS IN BOTH SIDES OF THE PLAYER
+    private void TripleShot(InputAction.CallbackContext context) 
     {
         if (tripleShotTimer < 0 && context.ReadValue<float>() == 1)
         {
             float spreadAngle = 0f;
 
-            for (int i = 0; i <= 2; i++) //RIGHT SIDE SHOTS
+            for (int i = 0; i <= 2; i++) 
             {
                 Vector3 shootDirection = tripleShotEmitter.position - transform.position;
                 GameObject shotProjectile = Instantiate(Stats.ProjectilePrefab, tripleShotEmitter.position, Quaternion.identity);
                 Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
 
-                switch (i) //GIVE A DIFERENT ANGLE TO EACH OF THE PROJECTILES
+                switch (i) 
                 {
                     case 0:
                         spreadAngle = 15f;
@@ -110,13 +110,13 @@ public class PlayerController : Player
                 StartCoroutine(DestroyProjectile(0.4f, shotProjectile));
             }
 
-            for (int i = 0; i <= 2; i++) //LEFT SIDE SHOTS
+            for (int i = 0; i <= 2; i++) 
             {
                 Vector3 shootDirection = tripleShotEmitter2.position - transform.position;
                 GameObject shotProjectile = Instantiate(Stats.ProjectilePrefab, tripleShotEmitter2.position, Quaternion.identity);
                 Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
 
-                switch (i) //GIVE A DIFERENT ANGLE TO EACH OF THE PROJECTILES
+                switch (i) 
                 {
                     case 0:
                         spreadAngle = 15f;
