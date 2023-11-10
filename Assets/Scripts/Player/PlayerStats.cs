@@ -6,13 +6,21 @@ using UnityEngine;
 
 public class PlayerStats : ScriptableObject
 {
-    [SerializeField] private float speed = 4;
+    [SerializeField] private float speed = 4f;
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private float jumpForce = 4;
-    [SerializeField] private float rotationSpeed = 4;
+    [SerializeField] private float rotationSpeed = 4f;
+
+    [SerializeField] private float singleShotCD = 1f;
+    [SerializeField] private float tripleShotCD = 2.5f;
+
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float projectileSpeed = 5f;
 
     public float Speed { get => speed; set => speed = value; }
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
-    public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
+    public float SingleShotCD { get => singleShotCD; set => singleShotCD = value; }
+    public float TripleShotCD { get => tripleShotCD; set => tripleShotCD = value; }
+    public GameObject ProjectilePrefab { get => projectilePrefab; set => projectilePrefab = value; }
+    public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
 }

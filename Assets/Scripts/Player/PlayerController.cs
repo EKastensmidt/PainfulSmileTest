@@ -8,7 +8,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : Player
 {
     private Vector3 movement;
-    private PlayerControls playerControls;
+    private PlayerControls playerControls; 
+
+    private float singleShotTimer;
+    private float tripleShotTimer;
 
     private void OnEnable()
     {
@@ -26,6 +29,9 @@ public class PlayerController : Player
 
         playerControls.GamePlay.Move.performed += ReadMoveInput;
         playerControls.GamePlay.Move.canceled += ReadMoveInput;
+
+        playerControls.GamePlay.SingleShot.performed += SingleShot;
+        playerControls.GamePlay.SideTripleShot.performed += TripleShot;
     }
 
     public override void Start()
@@ -39,6 +45,9 @@ public class PlayerController : Player
 
         MovePlayer();
         RotatePlayer();
+
+        singleShotTimer -= Time.deltaTime;
+        tripleShotTimer -= Time.deltaTime;
     }
 
     private void MovePlayer()
@@ -46,7 +55,7 @@ public class PlayerController : Player
         transform.position += movement * Stats.Speed * Time.deltaTime;
     }
 
-    private void RotatePlayer()
+    private void RotatePlayer()//ROTATE BASED ON INPUT
     {
         if(movement != Vector3.zero)
         {
@@ -55,10 +64,99 @@ public class PlayerController : Player
         }
     }
 
+    private void SingleShot(InputAction.CallbackContext context) //FORWARD SHOT
+    {
+        if (singleShotTimer < 0 && context.ReadValue<float>() == 1)
+        {
+            Vector3 shootDirection = singleShotEmitter.position - transform.position;
+
+            GameObject shotProjectile = Instantiate(Stats.ProjectilePrefab, singleShotEmitter.position, Quaternion.identity);
+            Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
+            projectileRb.velocity = shootDirection.normalized * Stats.ProjectileSpeed;
+
+            StartCoroutine(DestroyProjectile(4f, shotProjectile)); //DESTROY PROJECTILE IF DOESNT HIT ANYTHING
+
+            singleShotTimer = Stats.SingleShotCD;
+        }
+    }
+
+    private void TripleShot(InputAction.CallbackContext context) //TRIPLE SHOTS IN BOTH SIDES OF THE PLAYER
+    {
+        if (tripleShotTimer < 0 && context.ReadValue<float>() == 1)
+        {
+            float spreadAngle = 0f;
+
+            for (int i = 0; i <= 2; i++) //RIGHT SIDE SHOTS
+            {
+                Vector3 shootDirection = tripleShotEmitter.position - transform.position;
+                GameObject shotProjectile = Instantiate(Stats.ProjectilePrefab, tripleShotEmitter.position, Quaternion.identity);
+                Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
+
+                switch (i) //GIVE A DIFERENT ANGLE TO EACH OF THE PROJECTILES
+                {
+                    case 0:
+                        spreadAngle = 15f;
+                        break;
+                    case 1:
+                        spreadAngle = 0f;
+                        break;
+                    case 2:
+                        spreadAngle = -15f;
+                        break;
+                }
+
+                CalculateTripleShotSpread(shootDirection, spreadAngle, projectileRb);
+
+                StartCoroutine(DestroyProjectile(0.4f, shotProjectile));
+            }
+
+            for (int i = 0; i <= 2; i++) //LEFT SIDE SHOTS
+            {
+                Vector3 shootDirection = tripleShotEmitter2.position - transform.position;
+                GameObject shotProjectile = Instantiate(Stats.ProjectilePrefab, tripleShotEmitter2.position, Quaternion.identity);
+                Rigidbody2D projectileRb = shotProjectile.GetComponent<Rigidbody2D>();
+
+                switch (i) //GIVE A DIFERENT ANGLE TO EACH OF THE PROJECTILES
+                {
+                    case 0:
+                        spreadAngle = 15f;
+                        break;
+                    case 1:
+                        spreadAngle = 0f;
+                        break;
+                    case 2:
+                        spreadAngle = -15f;
+                        break;
+                }
+
+                CalculateTripleShotSpread(shootDirection, spreadAngle, projectileRb);
+
+                StartCoroutine(DestroyProjectile(0.4f, shotProjectile));
+            }
+
+            tripleShotTimer = Stats.SingleShotCD;
+        }
+    }
+
+    private void CalculateTripleShotSpread(Vector3 shootDirection, float spreadAngle, Rigidbody2D projectileRb)
+    {
+        float rotateAngle = spreadAngle + (Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg);
+        Vector2 ProjectileMovementDirection = new Vector2(Mathf.Cos(rotateAngle * Mathf.Deg2Rad), Mathf.Sin(rotateAngle * Mathf.Deg2Rad)).normalized;
+        projectileRb.velocity = ProjectileMovementDirection * (Stats.ProjectileSpeed * 1.5f);
+    }
+
     private void ReadMoveInput(InputAction.CallbackContext context)
     {
         var playerInput = context.ReadValue<Vector2>();
         movement.x = playerInput.x;
         movement.y = playerInput.y;
+    }
+
+    IEnumerator DestroyProjectile(float timer, GameObject projectile)
+    {
+        yield return new WaitForSeconds(timer);
+
+        if (projectile != null)
+            Destroy(projectile);
     }
 }

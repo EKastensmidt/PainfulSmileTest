@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     private Animator animator;
     private float health;
 
+    [SerializeField] protected Transform singleShotEmitter;
+    [SerializeField] protected Transform tripleShotEmitter;
+    [SerializeField] protected Transform tripleShotEmitter2;
+
     public PlayerStats Stats { get => stats; set => stats = value; }
     public Rigidbody2D Rb { get => rb; }
     public Collider2D Col { get => col; }

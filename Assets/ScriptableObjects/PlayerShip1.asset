@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   maxHealth: 100
-  jumpForce: 4
   rotationSpeed: 540
+  singleShotCD: 1
+  tripleShotCD: 2.5
+  projectilePrefab: {fileID: 2039531411329649159, guid: 93a60b7f0a7ea3b4aa9b08bfa7262b6f, type: 3}
+  projectileSpeed: 6

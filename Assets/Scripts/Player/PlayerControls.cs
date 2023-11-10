@@ -35,6 +35,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SingleShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""395ce82e-61c9-411c-96eb-ef515fadcf2f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SideTripleShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""bde63f50-4557-47f4-8b3d-5f529c38e054"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -147,6 +165,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a0840ad-06fe-49d8-9e93-bb5eda235d1e"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SingleShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""291b9fc3-9d05-403b-88e3-65ba32fc6a26"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideTripleShot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -156,6 +196,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // GamePlay
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
+        m_GamePlay_SingleShot = m_GamePlay.FindAction("SingleShot", throwIfNotFound: true);
+        m_GamePlay_SideTripleShot = m_GamePlay.FindAction("SideTripleShot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,11 +260,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GamePlay;
     private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
     private readonly InputAction m_GamePlay_Move;
+    private readonly InputAction m_GamePlay_SingleShot;
+    private readonly InputAction m_GamePlay_SideTripleShot;
     public struct GamePlayActions
     {
         private @PlayerControls m_Wrapper;
         public GamePlayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
+        public InputAction @SingleShot => m_Wrapper.m_GamePlay_SingleShot;
+        public InputAction @SideTripleShot => m_Wrapper.m_GamePlay_SideTripleShot;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +281,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @SingleShot.started += instance.OnSingleShot;
+            @SingleShot.performed += instance.OnSingleShot;
+            @SingleShot.canceled += instance.OnSingleShot;
+            @SideTripleShot.started += instance.OnSideTripleShot;
+            @SideTripleShot.performed += instance.OnSideTripleShot;
+            @SideTripleShot.canceled += instance.OnSideTripleShot;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -242,6 +294,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @SingleShot.started -= instance.OnSingleShot;
+            @SingleShot.performed -= instance.OnSingleShot;
+            @SingleShot.canceled -= instance.OnSingleShot;
+            @SideTripleShot.started -= instance.OnSideTripleShot;
+            @SideTripleShot.performed -= instance.OnSideTripleShot;
+            @SideTripleShot.canceled -= instance.OnSideTripleShot;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -262,5 +320,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IGamePlayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnSingleShot(InputAction.CallbackContext context);
+        void OnSideTripleShot(InputAction.CallbackContext context);
     }
 }
