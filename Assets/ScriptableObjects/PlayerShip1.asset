@@ -15,3 +15,4 @@ MonoBehaviour:
   speed: 4
   maxHealth: 100
   jumpForce: 4
+  rotationSpeed: 540
