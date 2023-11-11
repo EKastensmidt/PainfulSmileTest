@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseGame"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b52daf8-95d6-4baa-9155-a68f6fc74db5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SideTripleShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5dec594a-71a3-4f89-a816-5da744fe8fdb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GamePlay_Move = m_GamePlay.FindAction("Move", throwIfNotFound: true);
         m_GamePlay_SingleShot = m_GamePlay.FindAction("SingleShot", throwIfNotFound: true);
         m_GamePlay_SideTripleShot = m_GamePlay.FindAction("SideTripleShot", throwIfNotFound: true);
+        m_GamePlay_PauseGame = m_GamePlay.FindAction("PauseGame", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Move;
     private readonly InputAction m_GamePlay_SingleShot;
     private readonly InputAction m_GamePlay_SideTripleShot;
+    private readonly InputAction m_GamePlay_PauseGame;
     public struct GamePlayActions
     {
         private @PlayerControls m_Wrapper;
@@ -269,6 +291,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_GamePlay_Move;
         public InputAction @SingleShot => m_Wrapper.m_GamePlay_SingleShot;
         public InputAction @SideTripleShot => m_Wrapper.m_GamePlay_SideTripleShot;
+        public InputAction @PauseGame => m_Wrapper.m_GamePlay_PauseGame;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -287,6 +310,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SideTripleShot.started += instance.OnSideTripleShot;
             @SideTripleShot.performed += instance.OnSideTripleShot;
             @SideTripleShot.canceled += instance.OnSideTripleShot;
+            @PauseGame.started += instance.OnPauseGame;
+            @PauseGame.performed += instance.OnPauseGame;
+            @PauseGame.canceled += instance.OnPauseGame;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -300,6 +326,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @SideTripleShot.started -= instance.OnSideTripleShot;
             @SideTripleShot.performed -= instance.OnSideTripleShot;
             @SideTripleShot.canceled -= instance.OnSideTripleShot;
+            @PauseGame.started -= instance.OnPauseGame;
+            @PauseGame.performed -= instance.OnPauseGame;
+            @PauseGame.canceled -= instance.OnPauseGame;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -322,5 +351,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnSingleShot(InputAction.CallbackContext context);
         void OnSideTripleShot(InputAction.CallbackContext context);
+        void OnPauseGame(InputAction.CallbackContext context);
     }
 }

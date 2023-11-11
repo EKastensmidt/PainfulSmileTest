@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ public class PlayerController : Player
 
     private float singleShotTimer;
     private float tripleShotTimer;
+
+    public static event Action OnPlayerPauseGame;
 
     private void OnEnable()
     {
@@ -32,6 +35,7 @@ public class PlayerController : Player
 
         playerControls.GamePlay.SingleShot.performed += SingleShot;
         playerControls.GamePlay.SideTripleShot.performed += TripleShot;
+        playerControls.GamePlay.PauseGame.performed += PauseGame;
     }
 
     public override void Start()
@@ -158,5 +162,13 @@ public class PlayerController : Player
 
         if (projectile != null)
             Destroy(projectile);
+    }
+
+    private void PauseGame(InputAction.CallbackContext context)
+    {
+        if(context.ReadValue<float>() == 1)
+        {
+            OnPlayerPauseGame.Invoke();
+        }
     }
 }

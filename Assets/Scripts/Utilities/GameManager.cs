@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject pauseMenu;
+
+    private void OnEnable()
     {
-        
+        PlayerController.OnPlayerPauseGame += OpenPauseGameMenu;
+    }
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerPauseGame -= OpenPauseGameMenu;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenPauseGameMenu()
     {
-        
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f; 
     }
 }
