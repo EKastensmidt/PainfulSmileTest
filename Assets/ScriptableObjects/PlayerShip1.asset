@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 4
   maxHealth: 100
   rotationSpeed: 540
-  singleShotCD: 1
+  singleShotCD: 0.5
   tripleShotCD: 2.5
   projectilePrefab: {fileID: 2039531411329649159, guid: 93a60b7f0a7ea3b4aa9b08bfa7262b6f, type: 3}
   projectileSpeed: 6

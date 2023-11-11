@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Player : MonoBehaviour
+public class Player : Actor
 {
     [SerializeField] private PlayerStats stats;
-    private Rigidbody2D rb;
-    private Collider2D col;
     private float health;
 
     [SerializeField] protected Transform singleShotEmitter;
@@ -15,29 +13,26 @@ public class Player : MonoBehaviour
     [SerializeField] protected Transform tripleShotEmitter2;
 
     public PlayerStats Stats { get => stats; set => stats = value; }
-    public Rigidbody2D Rb { get => rb; }
-    public Collider2D Col { get => col; }
     public float Health { get => health; set => health = value; }
 
-    public virtual void Start()
+    public override void Start()
     {
-        PlayerSpawned();
+        base.Start();
     }
 
-    public virtual void Update()
+    public override void Update()
     {
-
+        base.Update();
     }
 
-    private void PlayerSpawned()
+    public override void ActorSpawned()
     {
-        rb = GetComponent<Rigidbody2D>();
-        col = GetComponent<Collider2D>();
+        base.ActorSpawned();
 
         health = stats.MaxHealth;
     }
 
-    public virtual void TakeDamage(int amount)
+    public override void TakeDamage(int amount)
     {
         health -= amount;
 

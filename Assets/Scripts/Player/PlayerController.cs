@@ -34,7 +34,10 @@ public class PlayerController : Player
         playerControls.GamePlay.Move.canceled += ReadMoveInput;
 
         playerControls.GamePlay.SingleShot.performed += SingleShot;
+        playerControls.GamePlay.SingleShot.canceled += SingleShot;
+
         playerControls.GamePlay.SideTripleShot.performed += TripleShot;
+
         playerControls.GamePlay.PauseGame.performed += PauseGame;
     }
 

@@ -1,49 +1,93 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Actor
 {
-    protected GameObject target;
-    private Collider2D col;
-    private Rigidbody2D rb;
+    [SerializeField] private EnemyStats stats;
+
+    private GameObject target;
     private float health;
 
-    public Collider2D Col { get => col; set => col = value; }
-    public Rigidbody2D Rb { get => rb; set => rb = value; }
     public float Health { get => health; set => health = value; }
+    public EnemyStats Stats { get => stats; set => stats = value; }
 
-    public virtual void Start()
+    public override void Start()
     {
-        EnemySpawned();
+        base.Start();
     }
 
-    public virtual void Update()
+    public override void Update()
     {
-        
+        MovePosition();
+        RotateShip();
     }
 
-    public virtual void FixedUpdate()
+    public override void ActorSpawned()
     {
+        base.ActorSpawned();
 
-    }
-
-    private void EnemySpawned()
-    {
-        col = GetComponent<Collider2D>();
-        rb = GetComponent<Rigidbody2D>();
         target = GameObject.Find("PlayerShip");
+        health = stats.MaxHealth;
     }
 
-    public virtual void TakeDamage(float damage)
+    public override void TakeDamage(int damage)
     {
-
+        health -= damage;
+        //Particles flying off?
+        if (health <= 0)
+        {
+            DestroyShip();
+        }
     }
 
     public virtual void DestroyShip()
     {
-
+        //Ship explotion animation
+        Destroy(gameObject);
     }
 
+    public virtual void MovePosition()
+    {
+        transform.position += ObstacleAvoidance() * stats.Speed * Time.deltaTime;
+    }
 
+    private void RotateShip()
+    {
+        Vector3 dir = target.transform.position - transform.position;
+        dir.Normalize();
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Stats.RotationSpeed * Time.deltaTime);
+    }
+
+    protected Vector3 ObstacleAvoidance()
+    {
+        Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, stats.ObstacleAvoidRadius, stats.AvoidLayerMask);
+
+        Collider2D closestObs = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            Collider2D col = obstacles[i];
+            if (closestDistance > Vector2.Distance(transform.position, col.ClosestPoint(transform.position)))
+            {
+                closestObs = col;
+            }
+        }
+        Vector2 dirToTarget = (target.transform.position - transform.position).normalized;
+
+        if (closestObs != null)
+        {
+            Vector2 dirObsToNpc = ((Vector2)transform.position - closestObs.ClosestPoint(transform.position));
+            dirObsToNpc = dirObsToNpc.normalized * stats.ObstacleAvoidWeight * Mathf.Min(Mathf.Sqrt(stats.ObstacleAvoidRadius), 2);
+
+            dirToTarget += dirObsToNpc;
+        }
+        return dirToTarget.normalized;
+    }
 }

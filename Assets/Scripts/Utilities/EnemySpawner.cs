@@ -7,15 +7,38 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<Enemy> enemyPrefabs = new List<Enemy>();
     private BoxCollider2D boxCollider;
 
+    private float enemySpawnTimer;
+    private float enemySpawnCD;
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
 
-        for (int i = 0; i < 10; i++)
+        if (PlayerPrefs.HasKey("EnemySpawnTime"))
         {
-            Vector2 randomPoint = PickRandomSpawnPoint();
-            Instantiate(enemyPrefabs[0], randomPoint, Quaternion.identity);
+            enemySpawnCD = PlayerPrefs.GetFloat("EnemySpawnTime");
         }
+        else
+        {
+            enemySpawnCD = 1f;
+        }
+
+        Debug.Log(enemySpawnCD);
+    }
+
+    private void Update()
+    {
+        SpawnEnemy();
+    }
+
+    private void SpawnEnemy()
+    {
+        if(enemySpawnTimer <= 0f)
+        {
+            Instantiate(PickRandomEnemy(), PickRandomSpawnPoint(), Quaternion.identity);
+            enemySpawnTimer = enemySpawnCD;
+        }
+        enemySpawnTimer -= Time.deltaTime;
     }
 
     private Vector2 PickRandomSpawnPoint()
@@ -35,5 +58,12 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return new Vector2(randomX, randomY);
+    }
+
+    private Enemy PickRandomEnemy()
+    {
+        int randNum = Random.Range(0, enemyPrefabs.Count);
+        return (enemyPrefabs[randNum]);
+       
     }
 }
