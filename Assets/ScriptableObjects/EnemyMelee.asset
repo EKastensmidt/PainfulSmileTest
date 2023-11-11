@@ -16,4 +16,8 @@ MonoBehaviour:
   speed: 2
   damage: 25
   rotationSpeed: 3
-  predictionTime: 5
+  obstacleAvoidRadius: 1
+  obstacleAvoidWeight: 0.8
+  avoidLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024

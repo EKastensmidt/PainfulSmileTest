@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MeleeEnemy : Enemy
@@ -10,7 +9,7 @@ public class MeleeEnemy : Enemy
     public EnemyMeleeStats Stats { get => stats; set => stats = value; }
 
     private Rigidbody2D rbTarget;
-
+    
     public override void Start()
     {
         base.Start();
@@ -23,29 +22,15 @@ public class MeleeEnemy : Enemy
     {
         base.Update();
 
-        RotateShip();
-    }
-
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-
         MovePosition();
+        RotateShip();
     }
 
     private void MovePosition()
     {
-        Rb.MovePosition(transform.position + GetMoveDirection() * stats.Speed * Time.deltaTime);
+        transform.position += ObstacleAvoidance() * stats.Speed * Time.deltaTime;
     }
     
-    private Vector3 GetMoveDirection()
-    {
-        float vel = rbTarget.velocity.magnitude;
-        Vector3 posPrediction = target.transform.position + target.transform.forward * vel * Stats.PredictionTime;
-        Vector3 dir = (posPrediction - transform.position).normalized;
-        return dir;
-    }
-
     private void RotateShip()
     {
         Vector3 dir = target.transform.position - transform.position;
@@ -71,6 +56,34 @@ public class MeleeEnemy : Enemy
     {
         //Explotion animation spawn
         Destroy(gameObject);
+    }
+
+    public Vector3 ObstacleAvoidance()
+    {
+        Collider2D[] obstacles = Physics2D.OverlapCircleAll(transform.position, stats.ObstacleAvoidRadius, stats.AvoidLayerMask);
+
+        Collider2D closestObs = null;
+        float closestDistance = float.MaxValue;
+
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            Collider2D col = obstacles[i];
+            if (closestDistance > Vector2.Distance(transform.position, col.ClosestPoint(transform.position)))
+            {
+                closestObs = col;
+            }
+        }
+        Vector2 dirToTarget = (target.transform.position - transform.position).normalized;
+
+        if (closestObs != null)
+        {
+            Vector2 dirObsToNpc = ((Vector2)transform.position - closestObs.ClosestPoint(transform.position));
+
+            dirObsToNpc = dirObsToNpc.normalized * stats.ObstacleAvoidWeight * Mathf.Min(Mathf.Sqrt(stats.ObstacleAvoidRadius), 2);
+
+            dirToTarget += dirObsToNpc;
+        }
+        return dirToTarget.normalized;
     }
 
 }

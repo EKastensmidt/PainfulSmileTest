@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7344701793895107239}
   - component: {fileID: 3754170667737597505}
   - component: {fileID: 9056352813444583942}
-  - component: {fileID: 5399095993085801697}
   - component: {fileID: 3475664646670260215}
+  - component: {fileID: 8724972069541169103}
   m_Layer: 7
   m_Name: EnemyMelee
   m_TagString: Untagged
@@ -114,8 +114,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &5399095993085801697
-BoxCollider2D:
+--- !u!114 &3475664646670260215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6417188514887360321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb29f25e63e5040428fda308991df442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 40eae41808dc1e749aec327d13992c6f, type: 2}
+  obstacleAvoidRadius: 1
+  obstacleAvoidWeight: 0.8
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!70 &8724972069541169103
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,29 +164,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01401186, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.03125, y: 1.765625}
-    newSize: {x: 1.03125, y: 1.765625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 1.75}
-  m_EdgeRadius: 0
---- !u!114 &3475664646670260215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6417188514887360321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb29f25e63e5040428fda308991df442, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 40eae41808dc1e749aec327d13992c6f, type: 2}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.6, y: 1.8}
+  m_Direction: 0
