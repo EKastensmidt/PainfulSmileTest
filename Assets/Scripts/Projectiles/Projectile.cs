@@ -13,6 +13,9 @@ public class Projectile : MonoBehaviour
         if (actor != null)
         {
             actor.TakeDamage(stats.Damage);
+
+            GameObject particles = Instantiate(stats.DamageParticles, new Vector3(transform.position.x,transform.position.y,-1f), Quaternion.identity);
+            particles.GetComponent<ParticleSystem>().Play();
         }
 
         Destroy(gameObject);

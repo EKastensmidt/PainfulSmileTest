@@ -52,6 +52,8 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetFloat("EnemySpawnTime", (float)Math.Round(enemySpawnSlider.value, 1));
         PlayerPrefs.Save();
 
+        Debug.Log((int)gameSessionSlider.value);
+
         optionsMenu.SetActive(false);
         menu.SetActive(true);
     }

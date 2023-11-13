@@ -4364,7 +4364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time: 0:00'
+  m_text: 0:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4391,7 +4391,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.95
+  m_fontSize: 44.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4399,7 +4399,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -5411,6 +5411,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3475664646670260215, guid: cd3e4113c1d59a643bb4633b6be844cd, type: 3}
   - {fileID: 6154981382737955643, guid: 8741502b6b215e049afd7781f000c5ea, type: 3}
+  player: {fileID: 0}
 --- !u!1 &1627944793
 GameObject:
   m_ObjectHideFlags: 0
@@ -5717,6 +5718,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1991863756}
   currentPoints: {fileID: 183019080}
   totalPoints: {fileID: 755771440}
+  timeLeft: {fileID: 1116337442}
 --- !u!1 &1694827583
 GameObject:
   m_ObjectHideFlags: 0
@@ -5902,10 +5904,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1694827584}
-  - {fileID: 1991863760}
   - {fileID: 183019079}
   - {fileID: 1116337441}
+  - {fileID: 1694827584}
+  - {fileID: 1991863760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

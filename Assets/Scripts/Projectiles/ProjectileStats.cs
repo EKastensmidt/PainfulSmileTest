@@ -7,6 +7,8 @@ using UnityEngine;
 public class ProjectileStats : ScriptableObject
 {
     [SerializeField] private int damage = 25;
+    [SerializeField] private GameObject damageParticles;
 
     public int Damage { get => damage; set => damage = value; }
+    public GameObject DamageParticles { get => damageParticles; set => damageParticles = value; }
 }

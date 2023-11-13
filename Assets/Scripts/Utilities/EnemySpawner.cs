@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     private float enemySpawnTimer;
     private float enemySpawnCD;
 
-    private GameObject player;
+    public GameObject player;
 
     private void Start()
     {
