@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -12,6 +13,9 @@ public class Enemy : Actor
 
     public float Health { get => health; set => health = value; }
     public EnemyStats Stats { get => stats; set => stats = value; }
+    public GameObject Target { get => target; set => target = value; }
+
+    public static event Action OnEnemyShipDestroyed;
 
     public override void Start()
     {
@@ -20,6 +24,9 @@ public class Enemy : Actor
 
     public override void Update()
     {
+        if (target == null)
+            return;
+
         MovePosition();
         RotateShip();
     }
@@ -28,14 +35,16 @@ public class Enemy : Actor
     {
         base.ActorSpawned();
 
-        target = GameObject.Find("PlayerShip");
+        target = GameObject.FindGameObjectWithTag("Player");
         health = stats.MaxHealth;
     }
 
     public override void TakeDamage(int damage)
     {
         health -= damage;
-        //Particles flying off?
+
+        DeteriorateShip();
+
         if (health <= 0)
         {
             DestroyShip();
@@ -44,7 +53,8 @@ public class Enemy : Actor
 
     public virtual void DestroyShip()
     {
-        //Ship explotion animation
+        OnEnemyShipDestroyed?.Invoke();
+
         Destroy(gameObject);
     }
 
@@ -89,5 +99,16 @@ public class Enemy : Actor
             dirToTarget += dirObsToNpc;
         }
         return dirToTarget.normalized;
+    }
+    private void DeteriorateShip()
+    {
+        if (health >= stats.MaxHealth / 3)
+        {
+            SpriteRenderer.sprite = stats.DeteriorationSprites[0];
+        }
+        else if (health < stats.MaxHealth / 3)
+        {
+            SpriteRenderer.sprite = stats.DeteriorationSprites[1];
+        }
     }
 }

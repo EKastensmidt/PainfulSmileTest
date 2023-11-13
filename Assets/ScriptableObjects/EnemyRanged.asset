@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09e7465248fb5e2439b6706e6c3e5fd9, type: 3}
-  m_Name: EnemyMelee
+  m_Name: EnemyRanged
   m_EditorClassIdentifier: 
-  maxHealth: 75
-  speed: 1.5
+  maxHealth: 50
+  speed: 1
   rotationSpeed: 3
   obstacleAvoidRadius: 1
   obstacleAvoidWeight: 0.8
@@ -21,11 +21,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   deteriorationSprites:
-  - {fileID: 21300000, guid: 7cee696ecf1281445a6deec78c18f2a8, type: 3}
-  - {fileID: 21300000, guid: 391b56aa5a905da409b9f8b79b156d6b, type: 3}
-  damage: 25
-  explosion: {fileID: 1855829801585707222, guid: b83b96ce576beb94ca0db1e549e633db, type: 3}
-  shootingDistance: 0
-  shootingCD: 0
-  projectilePrefab: {fileID: 0}
-  projectileSpeed: 0
+  - {fileID: 21300000, guid: c3ff6a3197cace44fa961b1ea14172e2, type: 3}
+  - {fileID: 21300000, guid: fd92ce1bc61b810419e61a82edc27b2b, type: 3}
+  damage: 0
+  explosion: {fileID: 0}
+  shootingDistance: 3
+  shootingCD: 1.25
+  projectilePrefab: {fileID: 2039531411329649159, guid: 5532a0682c866ef4593cb95adf80c0a6, type: 3}
+  projectileSpeed: 4

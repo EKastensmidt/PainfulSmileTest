@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3474553784582684143}
   - component: {fileID: 8731374270266788573}
   - component: {fileID: -6287471684585764850}
-  m_Layer: 9
-  m_Name: PlayerProjectile
+  m_Layer: 12
+  m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,4 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16a62a9c98c9914b8350d876ddfb0f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: c6138bd1e13ca5a41a53876d6ac8ee78, type: 2}
+  stats: {fileID: 11400000, guid: 93dd9235acf2c1e4888e50478ad42cbd, type: 2}

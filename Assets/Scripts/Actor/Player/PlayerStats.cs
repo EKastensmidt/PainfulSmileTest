@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "Scriptable Object/Players", order = 0)]
@@ -16,6 +17,8 @@ public class PlayerStats : ScriptableObject
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float projectileSpeed = 5f;
 
+    [SerializeField] private List<Sprite> deteriorationSprites;
+
     public float Speed { get => speed; set => speed = value; }
     public int MaxHealth { get => maxHealth; set => maxHealth = value; }
     public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
@@ -23,4 +26,5 @@ public class PlayerStats : ScriptableObject
     public float TripleShotCD { get => tripleShotCD; set => tripleShotCD = value; }
     public GameObject ProjectilePrefab { get => projectilePrefab; set => projectilePrefab = value; }
     public float ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public List<Sprite> DeteriorationSprites { get => deteriorationSprites; set => deteriorationSprites = value; }
 }

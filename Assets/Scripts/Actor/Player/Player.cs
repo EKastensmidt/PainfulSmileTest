@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +17,7 @@ public class Player : Actor
     public PlayerStats Stats { get => stats; set => stats = value; }
     public float Health { get => health; set => health = value; }
 
+    public static event Action OnGameOver;
     public override void Start()
     {
         base.Start();
@@ -36,9 +39,24 @@ public class Player : Actor
     {
         health -= amount;
 
-        //if (health <= 0)
-        //{
-        //    //Die
-        //}
+        DeteriorateShip();
+
+        if (health <= 0)
+        {
+            OnGameOver?.Invoke();
+            Destroy(gameObject);
+        }
+    }
+
+    private void DeteriorateShip()
+    {
+        if (health >= stats.MaxHealth / 3)
+        {
+            SpriteRenderer.sprite = stats.DeteriorationSprites[0];
+        }
+        else if (health < stats.MaxHealth / 3)
+        {
+            SpriteRenderer.sprite = stats.DeteriorationSprites[1];
+        }
     }
 }

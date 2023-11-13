@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: PlayerShip1
   m_EditorClassIdentifier: 
   speed: 4
-  maxHealth: 100
+  maxHealth: 125
   rotationSpeed: 540
   singleShotCD: 0.5
-  tripleShotCD: 2.5
+  tripleShotCD: 1.5
   projectilePrefab: {fileID: 2039531411329649159, guid: 93a60b7f0a7ea3b4aa9b08bfa7262b6f, type: 3}
   projectileSpeed: 6
+  deteriorationSprites:
+  - {fileID: 21300000, guid: 82ac85209cf8ee74282305da63cf7975, type: 3}
+  - {fileID: 21300000, guid: d1ce6514a30cde84487171bf480760c6, type: 3}

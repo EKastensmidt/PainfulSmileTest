@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class EnemySpawner : MonoBehaviour
     private float enemySpawnTimer;
     private float enemySpawnCD;
 
+    private GameObject player;
+
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if (PlayerPrefs.HasKey("EnemySpawnTime"))
         {
@@ -23,11 +27,13 @@ public class EnemySpawner : MonoBehaviour
             enemySpawnCD = 1f;
         }
 
-        Debug.Log(enemySpawnCD);
     }
 
     private void Update()
     {
+        if (player == null)
+            return;
+
         SpawnEnemy();
     }
 

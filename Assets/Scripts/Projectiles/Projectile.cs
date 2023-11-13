@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Actor actor = collision.GetComponent<Actor>();
+
         if (actor != null)
         {
             actor.TakeDamage(stats.Damage);
