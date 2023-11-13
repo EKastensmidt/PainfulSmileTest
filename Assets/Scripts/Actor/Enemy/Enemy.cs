@@ -16,6 +16,8 @@ public class Enemy : Actor
     public GameObject Target { get => target; set => target = value; }
 
     public static event Action OnEnemyShipDestroyed;
+    public static event Action OnEnemyTakeDamage;
+    public static event Action OnEnemySpawn;
 
     public override void Start()
     {
@@ -37,12 +39,14 @@ public class Enemy : Actor
 
         target = GameObject.FindGameObjectWithTag("Player");
         health = stats.MaxHealth;
+        OnEnemySpawn?.Invoke();
     }
 
     public override void TakeDamage(int damage)
     {
         health -= damage;
 
+        OnEnemyTakeDamage?.Invoke();
         DeteriorateShip();
 
         if (health <= 0)
@@ -55,7 +59,7 @@ public class Enemy : Actor
     {
         OnEnemyShipDestroyed?.Invoke();
 
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 
     public virtual void MovePosition()

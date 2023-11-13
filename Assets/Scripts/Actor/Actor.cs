@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Actor : MonoBehaviour
 {
+    [SerializeField] protected ProgressBar healthBar;
+
     private Collider2D col;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;

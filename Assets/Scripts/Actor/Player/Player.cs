@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class Player : Actor
 {
@@ -18,6 +19,9 @@ public class Player : Actor
     public float Health { get => health; set => health = value; }
 
     public static event Action OnGameOver;
+    public static event Action OnPlayerTakeDamage;
+    public static event Action OnPlayerSpawn;
+
     public override void Start()
     {
         base.Start();
@@ -33,12 +37,15 @@ public class Player : Actor
         base.ActorSpawned();
 
         health = stats.MaxHealth;
+        OnPlayerSpawn?.Invoke();
     }
 
     public override void TakeDamage(int amount)
     {
+
         health -= amount;
 
+        OnPlayerTakeDamage?.Invoke();
         DeteriorateShip();
 
         if (health <= 0)

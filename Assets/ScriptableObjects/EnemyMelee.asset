@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09e7465248fb5e2439b6706e6c3e5fd9, type: 3}
   m_Name: EnemyMelee
   m_EditorClassIdentifier: 
-  maxHealth: 75
+  maxHealth: 4
   speed: 1.5
   rotationSpeed: 3
   obstacleAvoidRadius: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   deteriorationSprites:
   - {fileID: 21300000, guid: 7cee696ecf1281445a6deec78c18f2a8, type: 3}
   - {fileID: 21300000, guid: 391b56aa5a905da409b9f8b79b156d6b, type: 3}
-  damage: 25
+  damage: 1
   explosion: {fileID: 1855829801585707222, guid: b83b96ce576beb94ca0db1e549e633db, type: 3}
   shootingDistance: 0
   shootingCD: 0

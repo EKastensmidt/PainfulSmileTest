@@ -5,13 +5,13 @@ using static UnityEngine.GraphicsBuffer;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] List<Enemy> enemyPrefabs = new List<Enemy>();
+    [SerializeField] List<GameObject> enemyPrefabs = new List<GameObject>();
     private BoxCollider2D boxCollider;
 
     private float enemySpawnTimer;
     private float enemySpawnCD;
 
-    public GameObject player;
+    private GameObject player;
 
     private void Start()
     {
@@ -66,7 +66,7 @@ public class EnemySpawner : MonoBehaviour
         return new Vector2(randomX, randomY);
     }
 
-    private Enemy PickRandomEnemy()
+    private GameObject PickRandomEnemy()
     {
         int randNum = Random.Range(0, enemyPrefabs.Count);
         return (enemyPrefabs[randNum]);

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d00059734b11af4d989506739f8cadc, type: 3}
   m_Name: PlayerProjectile
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 1
   damageParticles: {fileID: 4860241902763643623, guid: 3e4fd75024f29dc4496c8cc87756e5d3, type: 3}

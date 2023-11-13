@@ -464,7 +464,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 5a326b19ca4b3cd41b3e613b46e66508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -510,7 +510,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.14
+  m_Radius: 0.18
 --- !u!50 &122086462
 Rigidbody2D:
   serializedVersion: 4
@@ -1227,7 +1227,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 5a326b19ca4b3cd41b3e613b46e66508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -4515,7 +4515,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 9b8db58e59b5fe649856b0ee71ea95e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5409,9 +5409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 3475664646670260215, guid: cd3e4113c1d59a643bb4633b6be844cd, type: 3}
-  - {fileID: 6154981382737955643, guid: 8741502b6b215e049afd7781f000c5ea, type: 3}
-  player: {fileID: 0}
+  - {fileID: 6417188514887360321, guid: cd3e4113c1d59a643bb4633b6be844cd, type: 3}
+  - {fileID: 6417188514887360321, guid: 8741502b6b215e049afd7781f000c5ea, type: 3}
 --- !u!1 &1627944793
 GameObject:
   m_ObjectHideFlags: 0
@@ -6277,7 +6276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8074380806497166317, guid: 74b23c4a138303e4184082924f8d7c31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8074380806497166317, guid: 74b23c4a138303e4184082924f8d7c31, type: 3}
       propertyPath: m_LocalPosition.y
