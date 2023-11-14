@@ -37,6 +37,9 @@ public class Menu : MonoBehaviour
 
     public void Options()
     {
+        gameSessionSlider.value = PlayerPrefs.GetInt("GameSessionTime");
+        enemySpawnSlider.value = PlayerPrefs.GetFloat("EnemySpawnTime");
+
         menu.SetActive(false);
         optionsMenu.SetActive(true);   
     }
@@ -51,8 +54,6 @@ public class Menu : MonoBehaviour
         PlayerPrefs.SetInt("GameSessionTime", (int)gameSessionSlider.value);
         PlayerPrefs.SetFloat("EnemySpawnTime", (float)Math.Round(enemySpawnSlider.value, 1));
         PlayerPrefs.Save();
-
-        Debug.Log((int)gameSessionSlider.value);
 
         optionsMenu.SetActive(false);
         menu.SetActive(true);

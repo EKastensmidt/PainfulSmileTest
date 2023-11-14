@@ -18,13 +18,12 @@ public class PlayerHealthBar : MonoBehaviour
     private void OnDisable()
     {
         Player.OnPlayerTakeDamage -= DrawHearts;
-        Player.OnPlayerSpawn += DrawHearts;
+        Player.OnPlayerSpawn -= DrawHearts;
     }
 
     private void Start()
     {
         DrawHearts();
-
     }
 
     public void DrawHearts()
